@@ -1,0 +1,185 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin_Master.master.cs" Inherits="Admin_Admin_Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="Assets/images/admin_logo.png" type="image/x-icon">
+    <!-- prism css -->
+    <link rel="stylesheet" href="Assets/css/plugins/prism-coy.css">
+    <!-- data tables css -->
+    <link rel="stylesheet" href="Assets/css/plugins/dataTables.bootstrap4.min.css">
+    <!-- select2 css -->
+    <link rel="stylesheet" href="Assets/css/plugins/select2.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="Assets/css/style.css">
+    <asp:ContentPlaceHolder ID="content_header" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server" ID="script_main"></asp:ScriptManager>
+        <!-- [ Pre-loader ] start -->
+        <div class="loader-bg">
+            <div class="loader-track">
+                <div class="loader-fill"></div>
+            </div>
+        </div>
+        <!-- [ Pre-loader ] End -->
+        <!-- [ navigation menu ] start -->
+        <nav class="pcoded-navbar menu-light brand-blue">
+            <div class="navbar-wrapper">
+                <div class="navbar-content scroll-div">
+                    <div class="">
+                        <div class="main-menu-header">
+                            <img class="img-radius" src="Assets/images/admin_logo.png" alt="User-Profile-Image">
+                            <div class="user-details">
+                                <div id="more-details">Setting <i class="ml-2 fa fa-caret-down"></i></div>
+                            </div>
+                        </div>
+                        <div class="collapse" id="nav-user-link">
+                            <ul class="list-inline">
+                                <%--<li class="list-inline-item"><a href="user-profile.html" data-toggle="tooltip" title="View Profile"><i class="feather icon-user"></i></a></li>
+                                <li class="list-inline-item"><a href="email_inbox.html"><i class="feather icon-mail" data-toggle="tooltip" title="Messages"></i><small class="badge badge-pill badge-primary">5</small></a></li>--%>
+                                <li class="list-inline-item"><a href="Admin_Logout.aspx" data-toggle="tooltip" title="Logout" class="text-danger"><i class="feather icon-power"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="nav pcoded-inner-navbar">
+                        <li class="nav-item pcoded-hasmenu active">
+                            <a href="#!" class="nav-link active"><span class="pcoded-micon"><i class="fas fa-podcast"></i></span><span class="pcoded-mtext">Masters</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="A_Course_List.aspx"><i class="feather icon-gitlab mr-2"></i>Course Management</a></li>
+                                <li><a href="A_Sub_Course_List.aspx"><i class="feather icon-wind mr-2"></i>Sub Course Management</a></li>
+                                <li><a href="A_Subject_List.aspx"><i class="feather icon-book mr-2"></i>Subject Management</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item pcoded-hasmenu active">
+                            <a href="#!" class="nav-link active"><span class="pcoded-micon"><i class="feather icon-clock"></i></span><span class="pcoded-mtext">Time</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="A_Time_List.aspx"><i class="feather icon-clock mr-2"></i>Time Management</a></li>
+                                <li><a href="A_Assign_Batch_List.aspx"><i class="fas fa-stream mr-2"></i>Assign Batch</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu active">
+                            <a href="#!" class="nav-link active"><span class="pcoded-micon"><i class="fas fa-rupee-sign"></i></span><span class="pcoded-mtext">Fees</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="A_Fees_List.aspx"><i class="fas fa-cash-register mr-2"></i>Fees Management</a></li>
+                                <li><a href="A_Student_Fess_List.aspx"><i class="fas fa-rupee-sign mr-2"></i>Student Fees List</a></li>
+                                <li><a href="A_Student_Fees_Paid_List.aspx"><i class="fas fa-receipt mr-2"></i>Student Paid List</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu active">
+                            <a href="#!" class="nav-link active"><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Users</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="A_Student_List.aspx"><i class="feather icon-users mr-2"></i>Student List</a></li>
+                                <li><a href="A_Teacher_List.aspx"><i class="feather icon-users mr-2"></i>Teacher List</a></li>
+                                <li><a href="A_User_List.aspx"><i class="feather icon-settings mr-2"></i>System User</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu active">
+                            <a href="#!" class="nav-link active"><span class="pcoded-micon"><i class="feather icon-server"></i></span><span class="pcoded-mtext">Client Side</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="A_Material_List.aspx"><i class="feather icon-video mr-2"></i>Material List<i class="feather icon-book ml-2"></i></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- [ navigation menu ] end -->
+        <!-- [ Header ] start -->
+        <header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
+            <div class="m-header">
+                <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+                <%--<a href="javascrip:void(0);" class="b-brand">
+                    <!-- ========   change your logo hear   ============ -->
+                    <img src="../Client/Client_Assets/img/logo.png" alt="" class="logo img-fluid" style="height: 70px; width: 70px; border-radius: 50%">
+                </a>
+                --%>
+                <a href="#!" class="mob-toggler">
+                    <i class="feather icon-more-vertical"></i>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <%--  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="#!" class="pop-search"><i class="feather icon-search"></i></a>
+                        <div class="search-bar">
+                            <input type="text" class="form-control border-0 shadow-none" placeholder="Search hear">
+                            <button type="button" class="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>--%>
+                <ul class="navbar-nav ml-auto">
+                    <li>
+                        <div class="dropdown drp-user">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="feather icon-user"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-notification">
+                                <%--   <div class="pro-head">
+                                    <img src="Assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
+                                    <span>John Doe</span>
+                                    <a href="auth-signin.html" class="dud-logout" title="Logout">
+                                        <i class="feather icon-log-out"></i>
+                                    </a>
+                                </div>--%>
+                                <ul class="pro-body">
+                                    <%--   <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i>Profile</a></li>
+                                    <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i>My Messages</a></li>--%>
+                                    <li><a href="Admin_Logout.aspx" class="dropdown-item"><i class="feather icon-lock"></i>Log Out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <!-- [ Header ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="pcoded-main-container">
+            <asp:ContentPlaceHolder runat="server" ID="content_page"></asp:ContentPlaceHolder>
+            <%--  <footer class="bg-primary">
+                <section class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-12">
+                            <section class="text-center text-white py-2">Copyright &copy; 2020 Developed by :- </section>
+                        </div>
+                    </div>
+                </section>
+            </footer>--%>
+        </div>
+        <!-- [ Main Content ] end -->
+        <!-- Required Js -->
+        <script src="Assets/js/vendor-all.min.js"></script>
+        <script src="Assets/js/plugins/bootstrap.min.js"></script>
+        <script src="Assets/js/ripple.js"></script>
+        <script src="Assets/js/pcoded.min.js"></script>
+        <%--<script src="Assets/js/menu-setting.min.js"></script>--%>
+        <!-- prism Js -->
+        <script src="Assets/js/plugins/prism.js"></script>
+        <!-- datatable Js -->
+        <script src="Assets/js/plugins/jquery.dataTables.min.js"></script>
+        <script src="Assets/js/plugins/dataTables.bootstrap4.min.js"></script>
+        <script src="Assets/js/pages/data-advance-custom.js"></script>
+        <!-- select2 Js -->
+        <script src="Assets/js/plugins/select2.full.min.js"></script>
+        <!-- form-select-custom Js -->
+        <script src="Assets/js/pages/form-select-custom.js"></script>
+    </form>
+    <asp:ContentPlaceHolder ID="content_javascript" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

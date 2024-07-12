@@ -1,0 +1,727 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="madhuvan.master.cs" Inherits="madhuvan" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="description" content="Madhuvan Super Market || Himmatnagar" />
+
+    <meta name="keywords" content="Madhuvan Super Market, Himmatnagar" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Madhuvan Super Market </title>
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="icon" href="img/favicon.png" />
+    <!-- Css Styles -->
+    <link href="css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/owl.theme.default.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/fotorama.css" type="text/css" />
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
+    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" type="text/css" />--%>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link href="css/menu.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css' />
+    <style>
+        .myAlert-top {
+            position: fixed;
+            bottom: 0px;
+            left: 2%;
+            width: 96%;
+        }
+
+        .alert {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="css/floating-wpp.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+
+    <form id="form2" runat="server">
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
+        <!-- Page Preloder -->
+        <div id="preloder">
+            <div class="loader"></div>
+        </div>
+        <!-- Offcanvas Menu Begin -->
+        <div class="offcanvas-menu-overlay"></div>
+        <div class="offcanvas-menu-wrapper">
+            <div class="offcanvas__close">+</div>
+            <div class="offcanvas__auth">
+                <asp:LinkButton class="" runat="server" OnClientClick="popup_open()" ID="btn_login_dsktop" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fa fa-user login_icon mr-2 color-black"></i><span class="login_txt" runat="server" id="Span1">Account</span>
+                </asp:LinkButton>
+
+                <asp:Label runat="server" CssClass="use_name cut-text-one-user-side" ID="lbl_cust_name_dsktp"></asp:Label>
+
+
+            </div>
+            <div id="mobile-menu-wrap"></div>
+
+        </div>
+        <!-- Offcanvas Menu End -->
+
+        <!-- Header Section Begin -->
+        <header class="header">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 order-lg-1 order-md-1 order-1">
+
+                        <div class="header__logo">
+                            <div class="canvas__open">
+                                <i class="fa fa-bars"></i>
+                            </div>
+                            <a href="./index.aspx">
+                                <img src="img/logo.png" class="logo-img" alt="" /></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-7 col-md-12 col-12 order-lg-2 order-md-3 order-3">
+                        <div class="hmenu d-block">
+                            <div class="search">
+                                <asp:TextBox ID="txt_search" autocomplete="off" runat="server" onkeyup="autocompleteproduct()" CssClass="form-control search_box" placeholder="Search Your Product Here"></asp:TextBox>
+
+                                <asp:LinkButton ID="lnkbtn_search" runat="server" OnClick="lnkbtn_search_Click" CssClass="search_btn"><span class="fa fa-search"></span></asp:LinkButton>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-lg-2 col-md-6 col-sm-6 col-6 order-lg-3 order-md-2 order-2">
+                        <div class="header__right">
+                            <div class="header__right__auth">
+
+                                <asp:LinkButton class="" runat="server" OnClientClick="popup_open()" ID="btn_login_popup" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <i class="fa fa-user login_icon mr-2 color-black"></i><span class="login_txt" >Account</span>
+                                </asp:LinkButton>
+
+                                <asp:Label runat="server" CssClass="use_name1 cut-text-one-user-main" ID="lbl_cust_name"></asp:Label>
+
+                            </div>
+                            <ul class="header__right__widget">
+
+                                <li><a href="cart.aspx"><span class="icon_bag_alt"></span>
+                                    <div class="tip">
+                                        <asp:Label ID="lblcartcount" Text="0" runat="server"> </asp:Label>
+                                    </div>
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="subbar">
+                    <div class="container">
+                        <asp:Repeater runat="server" ID="rpt_category" OnItemDataBound="rpt_category_ItemDataBound">
+                            <ItemTemplate>
+                                <div class="dropdown">
+                                    <button class="dropbtn">
+                                        <%#Eval("prd_cat_name") %>
+                                        <asp:HiddenField runat="server" ID="hf_cat_id" Value='<%#Eval("prd_cat_id") %>' />
+                                        <i class="fa fa-caret-down first-arrow"></i>
+                                    </button>
+
+                                    <div class="dropdown-content">
+                                        <div class="row">
+                                            <asp:Repeater runat="server" ID="rpt_sub_category" OnItemDataBound="rpt_sub_category_ItemDataBound">
+                                                <ItemTemplate>
+                                                    <div class="col-lg-3 col-md-3 offset-1 column megamenu">
+
+
+                                                        <h3><%#Eval("psbc_name") %> <i class="fa fa-caret-down ml-1"></i>
+                                                            <asp:HiddenField runat="server" ID="hf_subcat_id" Value='<%#Eval("psbc_id") %>' />
+                                                        </h3>
+                                                        <asp:Repeater runat="server" ID="rpt_third_category" OnItemCommand="rpt_third_category_ItemCommand">
+                                                            <ItemTemplate>
+
+                                                                <asp:LinkButton runat="server" ID="lnk_redirect" CommandName="lnk_redirect" CommandArgument='<%#Eval("ptc_id") %>'>
+                                                                    <%#Eval("ptc_name") %>
+                                                                    <asp:HiddenField runat="server" ID="hf_ptc_name" Value='<%#Eval("ptc_name") %>' />
+                                                                </asp:LinkButton>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+
+                                                    </div>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+
+                                            <div class="col-lg-1"></div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+
+                    </div>
+                </div>
+
+                <nav class="header__menu">
+                    <ul>
+                        <ul id="mobile_sidebar" class="mobile_filter site-nav-wrap">
+                            <li class="clickSlide c_dropdown nav-link dropdown-active">
+                                <a href="#" class="slicknav_item slicknav_row">All Categories<i class="fa fa-caret-down ml-2"></i></a>
+                                <ul>
+                                    <asp:Repeater runat="server" ID="rpt_categories_responsive" OnItemDataBound="rpt_categories_responsive_ItemDataBound">
+                                        <ItemTemplate>
+                                            <li class="clickSlide1">
+                                                <a class="sub_menu" href="#"><%#Eval("prd_cat_name") %><i class="fa fa-caret-up ml-2"></i></a>
+                                                <asp:HiddenField runat="server" ID="hf_catid_responsive" Value='<%#Eval("prd_cat_id") %>' />
+                                                <ul>
+                                                    <asp:Repeater runat="server" ID="rpt_subcategories_responsive" OnItemDataBound="rpt_subcategories_responsive_ItemDataBound">
+                                                        <ItemTemplate>
+                                                            <li class="clickSlide2">
+                                                                <a class="sub_menu" href="#"><%#Eval("psbc_name") %><i class="fa fa-caret-up ml-2"></i></a>
+                                                                <asp:HiddenField runat="server" ID="hf_subcatid_responsive" Value='<%#Eval("psbc_id") %>' />
+                                                                <ul>
+                                                                    <asp:Repeater runat="server" ID="rpt_thirdcategory_responsive" OnItemCommand="rpt_thirdcategory_responsive_ItemCommand">
+                                                                        <ItemTemplate>
+                                                                            <li class="clickSlide3">
+                                                                                <asp:LinkButton runat="server" CssClass="rdctlink" ID="lnk_redirect_responsive" CommandName="lnk_redirect_responsive" CommandArgument='<%#Eval("ptc_id") %>'>
+                                                                                            <%#Eval("ptc_name") %>
+                                                                                </asp:LinkButton>
+                                                                            </li>
+                                                                        </ItemTemplate>
+                                                                    </asp:Repeater>
+                                                                </ul>
+                                                            </li>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </li>
+                        </ul>
+                        <li><a href="my_account.aspx">My Account</a></li>
+                        <li><a href="cart.aspx">Cart</a></li>
+                        <li><a href="addresses.aspx">Add Address</a></li>
+                        <li class="active"><a href="order_list.aspx">My Orders</a></li>
+
+                        <li><a class="wallet_balance">Wallet Balance : <span>
+                            <asp:Label runat="server" ID="lbl_wallet_balance">0</asp:Label></span></a></li>
+                        <%--<li><a href="./contact.aspx">Contact</a></li>--%>
+                        <a href="logout.aspx" runat="server" id="pnl_logout" visible="false">Log Out</a>
+                        <li class="about_content">
+                            <p>Call Us : <a href="tel:1800 890 1222">1800 890 1222</a></p>
+                            <p>8:00 AM to 8:00 PM, 365 days</p>
+                            <p>Should you encounter any bugs, glitches, lack of functionality, delayed deliveries, billing errors or other problems on the beta website, please email us on <a href="mailto:madhuvansupermart@gmail.com">madhuvansupermart@gmail.com</a></p>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <!-- Header Section End -->
+        <%-- <form id="form1" runat="server">--%>
+        <div>
+
+            <asp:ContentPlaceHolder ID="ContentPlace" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <!-- Footer Section Begin -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 col-sm-12">
+                        <div class="footer__about">
+                            <div class="footer__logo">
+                                <a href="./index.aspx">
+                                    <img src="img/logo.png" class="logo-img" alt="" /></a>
+                            </div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            cilisis.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="footer__widget">
+                            <h6>Madhuvan</h6>
+                            <ul class="row">
+                                <li class="col-lg-6 col-md-6 col-sm-6 col-6"><a href="my_account.aspx">My Account</a></li>
+                                <li class="col-lg-6 col-md-6 col-sm-6 col-6"><a href="cart.aspx">Cart</a></li>
+                            </ul>
+                            <ul class="row">
+                                <li class="col-lg-6 col-md-6 col-sm-6 col-6"><a href="addresses.aspx">Add Address</a></li>
+                                <li class="col-lg-6 col-md-6 col-sm-6 col-6"><a href="order_list.aspx">My Orders</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <%-- <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                        <div class="footer__widget">
+                            <h6>Quick links</h6>
+                            <ul>
+                                <li><a href="about.aspx">About</a></li>
+                                <li><a href="contact.aspx">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>--%>
+                    <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="footer__newslatter">
+                            <h6>Get Social With Us:</h6>
+                            <div class="footer__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                            <div class="footer__payment mt-3">
+                                <p>Available payment methods:</p>
+                                <img src="img/payment/razorpay.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="footer__copyright__text">
+                            <p>
+                                Copyright © 2020 All rights reserved
+                            <br />
+                                Developed and designed by <span><a href="https://squareroottechnology.com/" target="_blank">Square Root
+                                Technology</a></span>
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div id="myButton" style="z-index: 11111 !important"></div>
+        <!-- Footer Section End -->
+
+        <!-- Modal -->
+        <div class="modal fade user_auth" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content container">
+                    <button type="button" class="close text-right close_modal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="wrap-login100 row">
+                        <div class="login100-pic js-tilt col-lg-6 d-lg-block d-none">
+                            <img src="img/login_img.png" alt="IMG" class="login_img" />
+                        </div>
+
+                        <div class="login100-form validate-form col-lg-6 col-12 pt-lg-5" id="pnl_login_user" runat="server">
+                            <span class="login100-form-title">User Login
+                            </span>
+
+                            <div class="wrap-input100">
+                                <asp:TextBox ID="txt_mobile_no_login" CssClass="input100" placeholder="Mobile Number" runat="server"></asp:TextBox>
+                                <span class="focus-input100"></span>
+                                <asp:RegularExpressionValidator ForeColor="Red" runat="server" ID="regx_txt_mobile_no_login" ControlToValidate="txt_mobile_no_login" ValidationGroup="login" ValidationExpression="^[0-9]{10}$" ErrorMessage="Enter Valid Contact Number" Display="Dynamic" />
+
+                                <asp:RequiredFieldValidator ID="rf_txt_mobile_no_login" ForeColor="Red" runat="server" ErrorMessage="Please Fill Mobile No" ControlToValidate="txt_mobile_no_login" ValidationGroup="login" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-mobile-phone" aria-hidden="true"></i>
+                                </span>
+                            </div>
+
+                            <div class="wrap-input100 validate-input">
+                                <asp:TextBox ID="txt_password_login" runat="server" TextMode="Password" CssClass="input100" placeholder="Password"></asp:TextBox>
+                                <span class="focus-input100"></span>
+
+                                <asp:RequiredFieldValidator ID="rf_txt_password_login" ForeColor="Red" runat="server" ErrorMessage="Please Fill Password" ControlToValidate="txt_password_login" ValidationGroup="login" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <span class="symbol-input100">
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                </span>
+                            </div>
+
+                            <div class="container-login100-form-btn">
+
+                                <asp:Button ID="btnlogin" OnClick="btnlogin_Click" ValidationGroup="login" CssClass="login100-form-btn" runat="server" Text="Login" />
+                            </div>
+
+                            <div class="text-center p-t-12">
+                                <span class="txt1"></span>
+                                <a class="txt2" href="javascript:void(0);" onclick="btn_forgotpassword()">Forget Password?</a>
+                            </div>
+
+                            <div class="text-center p-t-136">
+                                <a href="javascript:void(0);" onclick="btn_registration()">Create your Account
+							            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <asp:UpdatePanel ID="updtpnl_forget_password" runat="server">
+                            <ContentTemplate>
+                                <div class="myAlert-top alert alert-success" runat="server" id="div1">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong runat="server" id="alert_text_fp"></strong>
+                                </div>
+                                <div class="login100-form validate-form pt-lg-5" id="pnl_forgot_password_user">
+                                    <span class="login100-form-title">Forgot Password</span>
+                                    <div class="wrap-input100">
+                                        <asp:TextBox ID="txt_mobileno_fp" placeholder="Mobile No." CssClass="input100" runat="server"></asp:TextBox>
+                                        <asp:RegularExpressionValidator runat="server" ForeColor="Red" ID="regx_txt_mobileno_fp" ControlToValidate="txt_mobileno_fp" Display="Dynamic" ValidationGroup="login" ValidationExpression="^[0-9]{10}$" ErrorMessage="Enter Valid Contact Number" />
+
+
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-mobile-phone" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <div class="wrap-input100 validate-input" id="pnl_otp_fp" style="display: none">
+                                        <asp:TextBox ID="txt_otp_fp" placeholder="OTP Received On Registered Mobile Number" CssClass="input100" runat="server" ValidationGroup="login"></asp:TextBox>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <div class="wrap-input100 validate-input" id="pnl_password_fp" style="display: none">
+                                        <asp:TextBox ID="txt_password_fp" placeholder="New Password" CssClass="input100" runat="server" ValidationGroup="login"></asp:TextBox>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+
+                                    <div class="container-login100-form-btn">
+                                        <asp:Button ID="btn_forget_password" OnClick="btn_forget_password_Click" CssClass="login100-form-btn" runat="server" Text="Send OTP" />
+                                    </div>
+                                    <div class="text-center p-t-136">
+                                        <a href="javascript:void(0);" onclick="btn_login()">Back To Login
+							            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_forget_password" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                    </div>
+
+
+                    <div class="login100-form validate-form" id="pnl_register_user" runat="server">
+                        <span class="login100-form-title">User Registration</span>
+
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                                <div class="myAlert-top alert alert-success" runat="server" id="div_alert">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong runat="server" id="alert_text"></strong>
+                                </div>
+                                <div id="pnl_registration_form">
+                                    <div class="wrap-input100">
+                                        <asp:TextBox ID="txt_name" CssClass="input100" placeholder="User Name" runat="server"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rf_txt_name" runat="server" ErrorMessage="Please Fill Name" ControlToValidate="txt_name" ValidationGroup="save" Display="None"></asp:RequiredFieldValidator>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <div class="wrap-input100">
+                                        <asp:TextBox ID="txt_mob_no" CssClass="input100" placeholder="Mobile Number" runat="server"></asp:TextBox>
+                                        <asp:RegularExpressionValidator runat="server" ID="regexp_txt_mob_no" ControlToValidate="txt_mob_no" Display="none" ValidationGroup="save" ValidationExpression="^[0-9]{10}$" ErrorMessage="Enter Valid Contact Number" />
+                                        <asp:RequiredFieldValidator ID="rf_txt_mob_no" runat="server" ErrorMessage="Please Fill Mobile Number" ControlToValidate="txt_mob_no" ValidationGroup="save" Display="None"></asp:RequiredFieldValidator>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-mobile-phone" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <div class="wrap-input100">
+                                        <asp:TextBox ID="txt_referel_no" CssClass="input100" placeholder="Reference Number" runat="server"></asp:TextBox>
+                                        <asp:RegularExpressionValidator runat="server" ID="re_txt_referel_no" ControlToValidate="txt_referel_no" Display="none" ValidationGroup="save" ValidationExpression="^[0-9]{10}$" ErrorMessage="Enter Valid Reference Number" />
+
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-mobile-phone" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <%-- <div class="wrap-input100">
+                                                <asp:TextBox ID="txt_email" CssClass="input100" placeholder="Email ID" runat="server"></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="regexp_txt_email" runat="server" ValidationGroup="save" ControlToValidate="txt_email" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" Display="none" ErrorMessage="Invalid email address" />
+                                                <span class="focus-input100"></span>
+                                                <span class="symbol-input100">
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                </span>
+                                            </div>--%>
+                                    <div class="wrap-input100 validate-input">
+                                        <asp:TextBox ID="txt_password" runat="server" CssClass="input100" placeholder="Password"></asp:TextBox>
+                                        <asp:RegularExpressionValidator ID="regexp_txt_password" runat="server" ControlToValidate="txt_password"
+                                            ErrorMessage="Minimum password length is 6" Display="None" ValidationExpression="^([a-zA-Z0-9@#$%^&+=*]{6,30})$"
+                                            ValidationGroup="save" />
+                                        <asp:RequiredFieldValidator ID="rf_txt_password" runat="server" ErrorMessage="Please Fill Password" ControlToValidate="txt_password" ValidationGroup="save" Display="None"></asp:RequiredFieldValidator>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100">
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+
+                                </div>
+                                <div id="pnl_otp_form" style="display: none">
+                                    <div class="wrap-input100 validate-input" data-validate="Password is required" id="pnl_otp">
+                                        <asp:TextBox ID="txt_otp" ValidationGroup="reg" CssClass="input100" runat="server" TextMode="Password" placeholder="OTP"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfotp" runat="server" ErrorMessage="Please Enter OTP" ControlToValidate="txt_otp" ValidationGroup="reg" Display="None"></asp:RequiredFieldValidator>
+                                        <span class="focus-input100"></span>
+                                        <span class="symbol-input100"><i class="fa fa-neuter" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                                <div class="container-login100-form-btn">
+                                    <asp:Button ID="btn_reg" OnClick="btn_reg_Click" ValidationGroup="save" CssClass="login100-form-btn" runat="server" Text="Send OTP" />
+                                    <asp:ValidationSummary ID="vsreg" ValidationGroup="save" ShowMessageBox="True" ShowSummary="False" runat="server" />
+                                </div>
+
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btn_reg" EventName="Click" />
+
+                            </Triggers>
+                            <Triggers>
+                            </Triggers>
+                        </asp:UpdatePanel>
+
+
+                        <div class="text-center p-t-136">
+                            <a class="txt2" onclick="btn_login()" href="javascript:void(0);">Already Have an Account?
+							                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+
+  
+    <%--<script src="js/jquery-3.3.1.min.js"></script>--%>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/fotorama.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+  
+    <script type="text/javascript">
+        function autocompleteproduct() {
+            //debugger;
+            $(function () {
+                $("[id$=txt_search]").autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: '<%=ResolveUrl("index.aspx/GetProduct")%>',
+                            data: "{ 'prefix': '" + request.term + "'}",
+                            dataType: "json",
+                            type: "POST",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                if (data.d.length > 0) {
+                                    response($.map(data.d, function (item) {
+                                        return {
+                                            label: item.split('-')[0] + ' ('
+                                                + item.split('-')[1] + ' )',
+                                            value: item.split('-')[0],
+                                            val: item.split('-')[1],
+                                            val1: item.split('-')[2],
+                                            pm_product_name: item.split('-')[0],
+                                            ptc_name: item.split('-')[2],
+                                            pm_third_cat_id: item.split('-')[4],
+                                            pm_id: item.split('-')[5],
+                                            bm_brand_name: item.split('-')[1],
+                                            bm_brand_id: item.split('-')[3]
+
+                                        }
+                                    }))
+                                } else {
+                                    response([{
+                                        label: 'No Product Found',
+                                        value: ""
+                                    }]);
+                                }
+                            },
+                            error: function (response) {
+                                alert(response.responseText);
+                            },
+                            failure: function (response) {
+                                alert(response.responseText);
+                            },
+                        });
+                    },
+                    select: function (e, i) {
+
+                    },
+                    minLength: 1
+                });
+            });
+        }
+        //Auto Completing Product Ends
+
+    </script>
+    <script>
+        var input = document.getElementById("txt_search");
+        input.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("lnkbtn_search").click();
+            }
+        });
+    </script>
+    <script>
+        function myAlertTop() {
+            debugger;
+            $(".myAlert-top").show();
+            setTimeout(function () {
+                $(".myAlert-top").hide();
+            }, 2500);
+        }
+    </script>
+    <script>
+        function btn_registration() {
+            debugger;
+            document.getElementById("pnl_register_user").style.display = "block";
+            document.getElementById("pnl_login_user").style.display = "none";
+            document.getElementById("pnl_forgot_password_user").style.display = "none";
+        }
+        function btn_login() {
+            debugger;
+            document.getElementById("pnl_login_user").style.display = "block";
+            document.getElementById("pnl_forgot_password_user").style.display = "none";
+            document.getElementById("pnl_register_user").style.display = "none";
+        }
+        function btn_forgotpassword() {
+            debugger;
+            document.getElementById("pnl_login_user").style.display = "none";
+            document.getElementById("pnl_forgot_password_user").style.display = "block";
+            document.getElementById("pnl_register_user").style.display = "none";
+        }
+        function pnl_otp_fp_visible() {
+            debugger;
+            document.getElementById("pnl_otp_fp").style.display = "block";
+        }
+        function pnl_fp_password_visible() {
+            debugger;
+            document.getElementById("pnl_password_fp").style.display = "block";
+        }
+
+        function pnlVisiblityForRegistration() {
+            debugger;
+            document.getElementById("pnl_otp_form").style.display = "block";
+            document.getElementById("pnl_registration_form").style.display = "none";
+            document.getElementById("btn_reg").value = "Verify OTP";
+        }
+
+        function popup_open() {
+            debugger;
+            document.getElementById("pnl_login_user").style.display = "block";
+            document.getElementById("pnl_forgot_password_user").style.display = "none";
+            document.getElementById("pnl_register_user").style.display = "none";
+            document.getElementById("txt_mobile_no_login").value = "";
+            document.getElementById("txt_password_login").value = "";
+            document.getElementById("txt_name").value = "";
+            document.getElementById("txt_mob_no").value = "";
+            document.getElementById("txt_password").value = "";
+            document.getElementById("txt_mobileno_fp").value = "";
+            document.getElementById("txt_otp_fp").value = "";
+            document.getElementById("txt_password_fp").value = "";
+            document.getElementById("txt_otp").value = "";
+
+        }
+
+  
+    </script>
+    <script type="text/javascript" src="js/floating-wpp.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#myButton').floatingWhatsApp({
+                phone: '919033250162',
+                popupMessage: 'Hello, how can we help you?',
+                message: "Hi, Sir",
+                showPopup: true,
+                showOnIE: false,
+                headerTitle: 'Welcome!',
+                //headerColor: 'crimson',
+                //backgroundColor: 'crimson',
+                buttonImage: '<img src="img/svg/whatsapp.svg" />'
+            });
+        });
+    </script>
+    <script>
+        /// some script
+
+        // jquery ready start
+        $(document).ready(function () {
+            // jQuery code
+
+            //////////////////////// Prevent closing from click inside dropdown
+            $(document).on('click', '.dropdown-menu', function (e) {
+                e.stopPropagation();
+            });
+
+
+        }); // jquery end
+
+
+        $(document).ready(function () {
+
+            // NAV TOGGLE ONCLICK WITH SLIDE
+            $(".clickSlide ul").hide();
+            $(".clickSlide").click(function () {
+                $(this).children("ul").stop(true, true).slideToggle("fast"),
+                    $(this).toggleClass("dropdown-active");
+            });
+            $(".clickSlide1 ul").hide();
+            $(".clickSlide1").click(function (e) {
+                $(this).children("ul").stop(true, true).slideToggle("fast"),
+                    $(this).toggleClass("dropdown-active");
+                e.stopPropagation();
+                e.preventDefault();
+            });
+            $(".clickSlide2 ul").hide();
+            $(".clickSlide2").click(function (e) {
+                $(this).children("ul").stop(true, true).slideToggle("fast"),
+                    $(this).toggleClass("dropdown-active");
+                e.stopPropagation();
+                e.preventDefault();
+            });
+
+            $(".clickSlide3").click(function (e) {
+                var link_url = $(this).find('.rdctlink').attr('href');
+                window.location.href = link_url;
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-submenu a.test').on("click", function (e) {
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+        });
+    </script>
+
+      <asp:ContentPlaceHolder ID="Contentscript" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>
